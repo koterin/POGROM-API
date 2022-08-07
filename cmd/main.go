@@ -2,8 +2,8 @@ package main
 
 import (
     log "github.com/sirupsen/logrus"
-    "pogrom/config"
-    "pogrom/internal/app"
+	"pogrom/config"
+	"pogrom/internal/app"
 )
 
 func main() {

@@ -37,13 +37,13 @@ func Validate() {
 */
     _, err := url.Parse(Args.HOST_URL)
     if err != nil {
-        log.Println("HOST_URL env is invalid. Required format: https://test.domain.com")
+        log.Println("HOST_URL env is invalid. Required format is: https://test.domain.com")
         log.Fatal(err)
     }
 
     _, err = url.ParseRequestURI(Args.HOST_URL)
     if err != nil {
-        log.Println("HOST_URL env is invalid. Required format: https://test.domain.com")
+        log.Println("HOST_URL env is invalid. Required format is: https://test.domain.com")
         log.Fatal(err)
     }
 }

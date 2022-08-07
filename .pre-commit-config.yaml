@@ -26,4 +26,4 @@ repos:
   rev: v1.47.3
   hooks:
   - id: golangci-lint
-    files: /cmd/.+go
+    files: .+\.go
