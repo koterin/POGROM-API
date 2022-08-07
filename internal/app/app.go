@@ -3,8 +3,8 @@ package app
 import (
         "fmt"
 
-    log "github.com/sirupsen/logrus"
-    "pogrom/config"
+	log "github.com/sirupsen/logrus"
+	"pogrom/config"
 )
 
 func Run() {

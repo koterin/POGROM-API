@@ -3,8 +3,8 @@ package config
 import (
         "net/url"
 
-    "github.com/alexflint/go-arg"
-    log "github.com/sirupsen/logrus"
+	"github.com/alexflint/go-arg"
+	log "github.com/sirupsen/logrus"
 )
 
 var Args struct {
