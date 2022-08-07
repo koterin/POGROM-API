@@ -1,0 +1,6 @@
+*swp
+*.crt
+*.key
+*.env
+*ssh*
+*.db-secret
