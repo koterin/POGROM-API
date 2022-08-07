@@ -1,7 +1,7 @@
 package main
 
 import (
-        log "github.com/sirupsen/logrus"
+    log "github.com/sirupsen/logrus"
 	"pogrom/config"
 	"pogrom/internal/app"
 )
