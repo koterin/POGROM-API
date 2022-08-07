@@ -14,7 +14,7 @@ func main() {
         log.Fatal(err)
     }
 
-    log.SetFormatter(&log.JSONFormatter{})
+//    log.SetFormatter(&log.JSONFormatter{})
     log.SetLevel(level)
 
     app.Run()
