@@ -20,10 +20,3 @@ repos:
   rev: v1.3.0
   hooks:
   - id: remove-tabs
-
-# GO linter
-- repo: https://github.com/golangci/golangci-lint
-  rev: v1.47.3
-  hooks:
-  - id: golangci-lint
-    files: .+\.go

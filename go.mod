@@ -4,6 +4,7 @@ go 1.18
 
 require (
     github.com/alexflint/go-arg v1.4.3
+    github.com/lib/pq v1.10.6
     github.com/sirupsen/logrus v1.9.0
 )
 

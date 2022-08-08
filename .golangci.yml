@@ -23,7 +23,7 @@ linters:
   - execinquery
   - exhaustive
   - funlen
-  - gci
+  #  - gci
   - goconst
   - gosec
   - misspell
