@@ -9,5 +9,5 @@ type ClientRequest struct {
 type ServerResponse struct {
     Status      int     `json:"status"`
     Response    string  `json:"response"`
+    Flow        string  `json:"flow,omitempty"`
 }
-
