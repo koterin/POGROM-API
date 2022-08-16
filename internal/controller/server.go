@@ -31,15 +31,3 @@ func addBasicHeaders(w http.ResponseWriter) {
     w.Header().Set("Access-Control-Allow-Headers", "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers")
     w.Header().Set("Content-Type", "application/json")
 }
-
-func sendAnswer(w http.ResponseWriter, status int, msg string) {
-    addBasicHeaders(w);
-    w.WriteHeader(status)
-
-    answer := entity.ServerResponse {
-                        Status: status,
-                        Response: msg,
-                     }
-
-    json.NewEncoder(w).Encode(answer)
-}

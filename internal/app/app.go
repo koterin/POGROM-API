@@ -3,9 +3,6 @@ package app
 import (
     "net/http"
     // "database/sql"
-    "os"
-    "os/signal"
-    "syscall"
 
     log "github.com/sirupsen/logrus"
     "pogrom/config"
@@ -32,13 +29,9 @@ func Run() {
 
     log.Println("Successfully connected to DB")
 */
-    shutdown := make(chan os.Signal, 1)
-    signal.Notify(shutdown, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 
     http.HandleFunc("/api/health-check", controller.PostHealthCheck)
+    http.HandleFunc("/api/item", controller.GetItem)
 
     log.Fatal(http.ListenAndServe(config.Args.PORT, nil))
-
-    <-shutdown
-    log.Println("Server gracefully shut down")
 }
