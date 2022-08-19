@@ -3,7 +3,7 @@ package controller
 import (
     "encoding/json"
     "fmt"
-    "io/ioutil"
+    "io"
     "net/http"
 
     "pogrom/config"
@@ -11,7 +11,7 @@ import (
 )
 
 func ReadJson(req *http.Request, data *entity.ClientRequest) error {
-    resp, err := ioutil.ReadAll(req.Body)
+    resp, err := io.ReadAll(req.Body)
     if err != nil {
         return fmt.Errorf("\nError in ReadJson %w", err)
     }

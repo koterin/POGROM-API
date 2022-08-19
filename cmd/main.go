@@ -1,9 +1,10 @@
 package main
 
 import (
-    log "github.com/sirupsen/logrus"
     "pogrom/config"
     "pogrom/internal/app"
+
+    log "github.com/sirupsen/logrus"
 )
 
 func main() {
@@ -14,7 +15,7 @@ func main() {
         log.Fatal(err)
     }
 
-//    log.SetFormatter(&log.JSONFormatter{})
+    //  log.SetFormatter(&log.JSONFormatter{})
     log.SetLevel(level)
 
     app.Run()

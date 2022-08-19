@@ -1,23 +1,23 @@
 package config
 
 import (
-        "net/url"
+    "net/url"
 
-	"github.com/alexflint/go-arg"
-	log "github.com/sirupsen/logrus"
+    "github.com/alexflint/go-arg"
+    log "github.com/sirupsen/logrus"
 )
 
 var Args struct {
-    LOG_LEVEL   string  `arg:"required,env"`
-    PORT        string  `arg:"required,env"`
-  //  DB_PASSWORD_FILE  string  `arg:"required,env"`
-  //  DB_PORT           int     `arg:"required,env"`
-  //  DB_HOST           string  `arg:"required,env"`
-  //  DB_USER           string  `arg:"required,env"`
-  //  DB_NAME           string  `arg:"required,env"`
-  //  TG_API_URL        string  `arg:"required,env"`
-  //  TG_BOT_KEY        string  `arg:"required,env"`
-    HOST_URL    string  `arg:"required,env"`
+    LOG_LEVEL string `arg:"required,env"`
+    PORT      string `arg:"required,env"`
+    //  DB_PASSWORD_FILE  string  `arg:"required,env"`
+    //  DB_PORT           int     `arg:"required,env"`
+    //  DB_HOST           string  `arg:"required,env"`
+    //  DB_USER           string  `arg:"required,env"`
+    //  DB_NAME           string  `arg:"required,env"`
+    //  TG_API_URL        string  `arg:"required,env"`
+    //  TG_BOT_KEY        string  `arg:"required,env"`
+    HOST_URL string `arg:"required,env"`
 }
 
 func Validate() {
@@ -25,16 +25,16 @@ func Validate() {
         log.Fatal(err)
     }
 
-/*    file, err := os.ReadFile(Args.DB_PASSWORD_FILE)
-    if err != nil {
-        log.Println("Path to or .db-secret itself is invalid")
-        log.Fatal(err)
-    }
+    /*    file, err := os.ReadFile(Args.DB_PASSWORD_FILE)
+          if err != nil {
+              log.Println("Path to or .db-secret itself is invalid")
+              log.Fatal(err)
+          }
 
-    if len(file) == 0 {
-        log.Fatal(".db-secret is empty")
-    }
-*/
+          if len(file) == 0 {
+              log.Fatal(".db-secret is empty")
+          }
+    */
     _, err := url.Parse(Args.HOST_URL)
     if err != nil {
         log.Println("HOST_URL env is invalid. Required format is: https://test.domain.com")
