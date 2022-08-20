@@ -1,61 +1,58 @@
 package controller
 
 import (
-    "net/http"
+	"net/http"
+	"strings"
 
-    "pogrom/internal/entity"
+	"pogrom/internal/entity"
 
-    log "github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 )
 
 func PostHealthCheck(w http.ResponseWriter, req *http.Request) {
-    var data entity.ClientRequest
+	var data entity.ClientRequest
 
-    log.Info("POST /api/health-check")
+	log.Info("POST /api/health-check")
 
-    if err := ReadJson(req, &data); err != nil {
-        sendAnswer(w, http.StatusBadRequest, "not ok")
+	if err := ReadJson(req, &data); err != nil {
+		sendResponse(w, http.StatusBadRequest, "not ok")
 
-        return
-    }
+		return
+	}
 
-    sendAnswer(w, http.StatusOK, "ok")
+	sendResponse(w, http.StatusOK, "ok")
 }
 
 func GetItem(w http.ResponseWriter, req *http.Request) {
-    var data entity.ClientRequest
+	var data entity.ClientRequest
 
-    log.Info("GET /api/item")
+	log.Info("GET /api/item")
 
-    if err := ReadJson(req, &data); err != nil {
-        sendAnswer(w, http.StatusBadRequest, "not ok")
+	if err := ReadJson(req, &data); err != nil {
+		sendResponse(w, http.StatusBadRequest, "not ok")
 
-        return
-    }
+		return
+	}
 
-    sendItem(w, entity.Items{"id1",
-        "some desc",
-        "testItem",
-        "active",
-        "ceramics",
-        "12:34:34"})
+	sendInfo(w, entity.Item{"id1",
+		"some desc",
+		"testItem",
+		"active",
+		"ceramics",
+		"12:34:34"})
 }
 
 func GetUser(w http.ResponseWriter, req *http.Request) {
-    var data entity.ClientRequest
+	log.Info("GET ", req.URL.Path)
 
-    log.Info("GET ", req.URL.Path)
+	userId := strings.TrimPrefix(req.URL.Path, "/api/users/")
 
-    if err := ReadJson(req, &data); err != nil {
-        sendAnswer(w, http.StatusBadRequest, "not ok")
+	if userId == "2" {
+		sendResponse(w, http.StatusBadRequest, "not ok")
 
-        return
-    }
+		return
+	}
 
-    sendItem(w, entity.Items{"id1",
-        "some desc",
-        "testItem",
-        "active",
-        "ceramics",
-        "12:34:34"})
+	sendInfo(w, entity.UserInfo{"1", "username", "bidder",
+		"active", "234", "3", "12:23:23"})
 }

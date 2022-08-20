@@ -1,30 +1,43 @@
 package entity
 
+type Response interface {
+	getId() string
+}
+
+func (i Item) getId() string {
+	return i.Id
+}
+
+func (i UserInfo) getId() string {
+	return i.Id
+}
+
 type ClientRequest struct {
-    Email    string  `json:"email"`
-    Code     string  `json:"code"`
-    Redirect string  `json:"redirect"`
+	Email    string `json:"email"`
+	Code     string `json:"code"`
+	Redirect string `json:"redirect"`
 }
 
 type ServerResponse struct {
-    Status          int     `json:"status"`
-    Response        string  `json:"response,omitempty"`
-    ChatId          string  `json:"chat-id,omitempty"`
-    Username        string  `json:"username,omitempty"`
-    UserId          string  `json:"user-id,omitempty"`
-    ItemId          string  `json:"item-id,omitempty"`
-    ItemDesc        string  `json:"description,omitempty"`
-    ItemTitle       string  `json:"title,omitempty"`
-    ItemStatus      string  `json:"status,omitempty"`
-    ItemCategory    string  `json:"category,omitempty"`
-    ItemCreatedAt   string  `json:"created-at,omitempty"`
+	Status   int    `json:"status"`
+	Response string `json:"response,omitempty"`
 }
 
-type Items struct {
-    Id          string
-    Desc        string
-    Title       string
-    Status      string
-    Category    string
-    CreatedAt   string
+type Item struct {
+	Id        string `json:"id"`
+	Desc      string `json:"desc,omitempty"`
+	Title     string `json:"title,omitempty"`
+	Status    string `json:"status,omitempty"`
+	Category  string `json:"category,omitempty"`
+	CreatedAt string `json:"created-at,omitempty"`
+}
+
+type UserInfo struct {
+	Id        string `json:"id"`
+	Username  string `json:"username,omitempty"`
+	Role      string `json:"role,omitempty"`
+	Status    string `json:"user-status,omitempty"`
+	Bidded    string `json:"bidded,omitempty"`
+	BidsWon   string `json:"bids-won,omitempty"`
+	CreatedAt string `json:"created-at,omitempty"`
 }
