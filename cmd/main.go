@@ -1,22 +1,22 @@
 package main
 
 import (
-    "pogrom/config"
-    "pogrom/internal/app"
+	"pogrom/config"
+	"pogrom/internal/app"
 
-    log "github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 )
 
 func main() {
-    config.Validate()
+	config.Validate()
 
-    level, err := log.ParseLevel(config.Args.LOG_LEVEL)
-    if err != nil {
-        log.Fatal(err)
-    }
+	level, err := log.ParseLevel(config.Args.LOG_LEVEL)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    //  log.SetFormatter(&log.JSONFormatter{})
-    log.SetLevel(level)
+	log.SetFormatter(&log.JSONFormatter{})
+	log.SetLevel(level)
 
-    app.Run()
+	app.Run()
 }

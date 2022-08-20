@@ -15,7 +15,8 @@ func PostHealthCheck(w http.ResponseWriter, req *http.Request) {
 	log.Info("POST /api/health-check")
 
 	if err := ReadJson(req, &data); err != nil {
-		sendResponse(w, http.StatusBadRequest, "not ok")
+		log.Error("Health-check Error")
+		sendResponse(w, http.StatusBadRequest, "error")
 
 		return
 	}
@@ -29,17 +30,19 @@ func GetItem(w http.ResponseWriter, req *http.Request) {
 	log.Info("GET /api/item")
 
 	if err := ReadJson(req, &data); err != nil {
-		sendResponse(w, http.StatusBadRequest, "not ok")
+		sendResponse(w, http.StatusBadRequest, "error")
 
 		return
 	}
 
-	sendInfo(w, entity.Item{"id1",
-		"some desc",
-		"testItem",
-		"active",
-		"ceramics",
-		"12:34:34"})
+	// log.Debug()
+	sendInfo(w, entity.Item{
+		Id:        "1",
+		Desc:      "description",
+		Title:     "title",
+		Status:    "active",
+		Category:  "category",
+		CreatedAt: "12 march 12:34:45"})
 }
 
 func GetUser(w http.ResponseWriter, req *http.Request) {
@@ -48,11 +51,18 @@ func GetUser(w http.ResponseWriter, req *http.Request) {
 	userId := strings.TrimPrefix(req.URL.Path, "/api/users/")
 
 	if userId == "2" {
-		sendResponse(w, http.StatusBadRequest, "not ok")
+		sendResponse(w, http.StatusBadRequest, "error")
 
 		return
 	}
 
-	sendInfo(w, entity.UserInfo{"1", "username", "bidder",
-		"active", "234", "3", "12:23:23"})
+	// log.Debug()
+	sendInfo(w, entity.UserInfo{
+		Id:        "1",
+		Username:  "username",
+		Role:      "role",
+		Status:    "active",
+		Bidded:    "123.45",
+		BidsWon:   "14",
+		CreatedAt: "12:23:23"})
 }
