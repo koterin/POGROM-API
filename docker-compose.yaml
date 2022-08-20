@@ -1,0 +1,43 @@
+---
+version: '3.5'
+
+volumes:
+  pogrom-db-volume:
+    name: pogrom-db-volume
+
+services:
+  pogrom-db:
+    hostname: pogrom-db
+    container_name: pogrom-db
+    image: postgres:14
+    restart: unless-stopped
+    environment:
+    - POSTGRES_DB=pogrom-db
+    - POSTGRES_USER=pogrom-manager
+    - POSTGRES_PASSWORD_FILE=/opt/pogrom/.db-secret
+    volumes:
+    - ./.db-secret:/opt/pogrom/.db-secret:ro
+    - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    - pogrom-db-volume:/var/lib/postgresql/data
+
+  pogrom-api:
+    hostname: pogrom-api
+    container_name: pogrom-api
+    image: pogrom-api
+    build: .
+    restart: unless-stopped
+    ports:
+    - 127.0.0.1:8090:8090
+    depends_on:
+    - pogrom-db
+    environment:
+    - PORT=:8090
+    - LOG_LEVEL=DEBUG
+    - HOST_URL=localhost:8090
+    - DB_HOST=pogrom-db
+    - DB_USER=pogrom-manager
+    - DB_PORT=5432
+    - DB_PASSWORD_FILE=./.db-secret
+    - DB_NAME=pogrom-db
+    volumes:
+    - ./.db-secret:/pogrom/.db-secret:ro
