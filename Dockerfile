@@ -9,6 +9,7 @@ FROM alpine:3.16 as server
 RUN apk --no-cache add ca-certificates
 
 COPY --from=builder /build/main /app/
+COPY ./.db-secret /app/
 
 WORKDIR /app
 

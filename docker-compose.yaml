@@ -17,7 +17,7 @@ services:
     - POSTGRES_PASSWORD_FILE=/opt/pogrom/.db-secret
     volumes:
     - ./.db-secret:/opt/pogrom/.db-secret:ro
-    - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    - ./deployment/init.sql:/docker-entrypoint-initdb.d/init.sql
     - pogrom-db-volume:/var/lib/postgresql/data
 
   pogrom-api:
@@ -39,5 +39,3 @@ services:
     - DB_PORT=5432
     - DB_PASSWORD_FILE=./.db-secret
     - DB_NAME=pogrom-db
-    volumes:
-    - ./.db-secret:/pogrom/.db-secret:ro

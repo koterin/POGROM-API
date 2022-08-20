@@ -39,5 +39,6 @@ type UserInfo struct {
 	Status    string `json:"user-status,omitempty"`
 	Bidded    string `json:"bidded,omitempty"`
 	BidsWon   string `json:"bids-won,omitempty"`
+	ChatId    string `json:"chat-id,omitempty"`
 	CreatedAt string `json:"created-at,omitempty"`
 }

@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strings"
 
+	db "pogrom/internal/database"
 	"pogrom/internal/entity"
 
 	log "github.com/sirupsen/logrus"
@@ -25,44 +26,40 @@ func PostHealthCheck(w http.ResponseWriter, req *http.Request) {
 }
 
 func GetItem(w http.ResponseWriter, req *http.Request) {
-	var data entity.ClientRequest
+	//	var data entity.ClientRequest
 
-	log.Info("GET /api/item")
+	log.Info("GET ", req.URL.Path)
 
-	if err := ReadJson(req, &data); err != nil {
-		sendResponse(w, http.StatusBadRequest, "error")
+	/*
+		if err := ReadJson(req, &data); err != nil {
+			sendResponse(w, http.StatusBadRequest, "error")
 
-		return
-	}
+			return
+		}
+	*/
 
-	// log.Debug()
+	itemId := strings.TrimPrefix(req.URL.Path, "/api/items/")
+
+	// TODO: log.Debug()
 	sendInfo(w, entity.Item{
-		Id:        "1",
-		Desc:      "description",
-		Title:     "title",
-		Status:    "active",
-		Category:  "category",
+		Id:        itemId,
 		CreatedAt: "12 march 12:34:45"})
 }
 
 func GetUser(w http.ResponseWriter, req *http.Request) {
 	log.Info("GET ", req.URL.Path)
 
-	userId := strings.TrimPrefix(req.URL.Path, "/api/users/")
+	username := strings.TrimPrefix(req.URL.Path, "/api/users/")
 
-	if userId == "2" {
+	userInfo, err := db.FindUser(username)
+	// TODO: Custom error here
+	if err != nil {
+		log.Error(err)
 		sendResponse(w, http.StatusBadRequest, "error")
 
 		return
 	}
 
 	// log.Debug()
-	sendInfo(w, entity.UserInfo{
-		Id:        "1",
-		Username:  "username",
-		Role:      "role",
-		Status:    "active",
-		Bidded:    "123.45",
-		BidsWon:   "14",
-		CreatedAt: "12:23:23"})
+	sendInfo(w, userInfo)
 }
