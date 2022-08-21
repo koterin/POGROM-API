@@ -25,9 +25,9 @@ func GetItemInfo(id string) (entity.Item, error) {
 	var info entity.Item
 
 	err := DB.QueryRow(`SELECT * FROM items WHERE id=$1;`,
-		id).Scan(&info.Title, &info.Desc, &info.Status, &info.Category,
-		&info.ImageLink, &info.RawPrice, &info.StartPrice, &info.OwnerId,
-		&info.CurrentPrice, &info.CreatedAt, &info.UpdatedAt)
+		id).Scan(&info.Id, &info.Title, &info.Desc, &info.Status,
+		&info.Category, &info.ImageLink, &info.RawPrice, &info.StartPrice,
+		&info.OwnerId, &info.CurrentPrice, &info.CreatedAt, &info.UpdatedAt)
 	if err != nil {
 		err = fmt.Errorf("\nError in GetItem: SELECT * FROM items WHERE id=%s: %w", id, err)
 	}
