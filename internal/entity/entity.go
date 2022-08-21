@@ -24,12 +24,18 @@ type ServerResponse struct {
 }
 
 type Item struct {
-	Id        string `json:"id"`
-	Desc      string `json:"desc,omitempty"`
-	Title     string `json:"title,omitempty"`
-	Status    string `json:"status,omitempty"`
-	Category  string `json:"category,omitempty"`
-	CreatedAt string `json:"created-at,omitempty"`
+	Id           string `json:"id"`
+	Title        string `json:"title,omitempty"`
+	Desc         string `json:"desc,omitempty"`
+	Status       string `json:"status,omitempty"`
+	Category     string `json:"category,omitempty"`
+	ImageLink    string `json:"image,omitempty"`
+	RawPrice     int    `json:"raw-price,omitempty"`
+	StartPrice   int    `json:"start-price,omitempty"`
+	OwnerId      string `json:"owner"`
+	CurrentPrice int    `json:"current-price"`
+	CreatedAt    string `json:"created-at,omitempty"`
+	UpdatedAt    string `json:"updated-at,omitempty"`
 }
 
 type UserInfo struct {

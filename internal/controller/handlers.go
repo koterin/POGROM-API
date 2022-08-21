@@ -26,24 +26,20 @@ func PostHealthCheck(w http.ResponseWriter, req *http.Request) {
 }
 
 func GetItem(w http.ResponseWriter, req *http.Request) {
-	//	var data entity.ClientRequest
-
 	log.Info("GET ", req.URL.Path)
-
-	/*
-		if err := ReadJson(req, &data); err != nil {
-			sendResponse(w, http.StatusBadRequest, "error")
-
-			return
-		}
-	*/
 
 	itemId := strings.TrimPrefix(req.URL.Path, "/api/items/")
 
-	// TODO: log.Debug()
-	sendInfo(w, entity.Item{
-		Id:        itemId,
-		CreatedAt: "12 march 12:34:45"})
+	itemInfo, err := db.GetItemInfo(itemId)
+	if err != nil {
+		log.Error("Error in GetItem: ", err)
+		sendResponse(w, http.StatusBadRequest, "No such user")
+
+		return
+	}
+
+	log.Debug(itemInfo)
+	sendInfo(w, itemInfo)
 }
 
 func GetUser(w http.ResponseWriter, req *http.Request) {
@@ -52,14 +48,13 @@ func GetUser(w http.ResponseWriter, req *http.Request) {
 	username := strings.TrimPrefix(req.URL.Path, "/api/users/")
 
 	userInfo, err := db.FindUser(username)
-	// TODO: Custom error here
 	if err != nil {
-		log.Error(err)
-		sendResponse(w, http.StatusBadRequest, "error")
+		log.Error("Error in GetUser: ", err)
+		sendResponse(w, http.StatusBadRequest, "No such user")
 
 		return
 	}
 
-	// log.Debug()
+	log.Debug(userInfo)
 	sendInfo(w, userInfo)
 }
