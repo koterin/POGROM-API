@@ -27,7 +27,7 @@ func Validate() {
 
 	file, err := os.ReadFile(Args.DB_PASSWORD_FILE)
 	if err != nil {
-		log.Println("Path to or .db-secret itself is invalid")
+		log.Info("Path to or .db-secret itself is invalid")
 		log.Fatal(err)
 	}
 
@@ -37,13 +37,13 @@ func Validate() {
 
 	_, err = url.Parse(Args.HOST_URL)
 	if err != nil {
-		log.Println("HOST_URL env is invalid. Required format is: https://test.domain.com")
+		log.Info("HOST_URL env is invalid. Required format is: https://test.domain.com")
 		log.Fatal(err)
 	}
 
 	_, err = url.ParseRequestURI(Args.HOST_URL)
 	if err != nil {
-		log.Println("HOST_URL env is invalid. Required format is: https://test.domain.com")
+		log.Info("HOST_URL env is invalid. Required format is: https://test.domain.com")
 		log.Fatal(err)
 	}
 }

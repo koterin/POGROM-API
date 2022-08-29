@@ -29,7 +29,8 @@ type Item struct {
 	Desc         string `json:"desc,omitempty"`
 	Status       string `json:"status,omitempty"`
 	Category     string `json:"category,omitempty"`
-	ImageLink    string `json:"image,omitempty"`
+	ImageLink    string `json:"image-link,omitempty"`
+	Image        []byte `json:"image,omitempty"`
 	RawPrice     int    `json:"raw-price,omitempty"`
 	StartPrice   int    `json:"start-price,omitempty"`
 	OwnerId      string `json:"owner"`

@@ -32,7 +32,7 @@ func Run() {
 		log.Fatal("01: DB connection is not established, ping errored: ", err)
 	}
 
-	log.Println("Successfully connected to DB")
+	log.Info("Successfully connected to DB")
 
 	http.HandleFunc("/api/health-check", controller.PostHealthCheck)
 	http.HandleFunc("/api/items/", controller.GetItem)

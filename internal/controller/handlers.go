@@ -2,6 +2,7 @@ package controller
 
 import (
 	"net/http"
+	"os"
 	"strings"
 
 	db "pogrom/internal/database"
@@ -33,13 +34,29 @@ func GetItem(w http.ResponseWriter, req *http.Request) {
 	itemInfo, err := db.GetItemInfo(itemId)
 	if err != nil {
 		log.Error("Error in GetItem: ", err)
-		sendResponse(w, http.StatusBadRequest, "No such user")
+		sendResponse(w, http.StatusBadRequest, "No such item")
 
 		return
 	}
 
 	log.Debug(itemInfo)
 	sendInfo(w, itemInfo)
+}
+
+func GetImage(w http.ResponseWriter, req *http.Request) {
+	log.Info("GET ", req.URL.Path)
+
+	imageId := strings.TrimPrefix(req.URL.Path, "/api/images/")
+
+	img, err := os.ReadFile("/images/" + imageId + ".png")
+	if err != nil {
+		log.Error("Error in GetItem: ", err)
+		sendResponse(w, http.StatusBadRequest, "Error getting image")
+
+		return
+	}
+
+	sendImage(w, img)
 }
 
 func GetUser(w http.ResponseWriter, req *http.Request) {

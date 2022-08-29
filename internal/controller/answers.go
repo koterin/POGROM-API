@@ -9,6 +9,7 @@ import (
 
 func sendResponse(w http.ResponseWriter, status int, msg string) {
 	addBasicHeaders(w)
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 
 	answer := entity.ServerResponse{
@@ -21,6 +22,14 @@ func sendResponse(w http.ResponseWriter, status int, msg string) {
 
 func sendInfo(w http.ResponseWriter, i ...entity.Response) {
 	addBasicHeaders(w)
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(i)
+}
+
+func sendImage(w http.ResponseWriter, img []byte) {
+	addBasicHeaders(w)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(img)
 }
