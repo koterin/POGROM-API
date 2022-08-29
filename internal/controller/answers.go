@@ -12,12 +12,10 @@ func sendResponse(w http.ResponseWriter, status int, msg string) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 
-	answer := entity.ServerResponse{
+	json.NewEncoder(w).Encode(entity.ServerResponse{
 		Status:   status,
 		Response: msg,
-	}
-
-	json.NewEncoder(w).Encode(answer)
+	})
 }
 
 func sendInfo(w http.ResponseWriter, i ...entity.Response) {
