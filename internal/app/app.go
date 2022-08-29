@@ -15,6 +15,14 @@ import (
 )
 
 func Run() {
+	level, err := log.ParseLevel(config.Args.LOG_LEVEL)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.SetFormatter(&log.JSONFormatter{})
+	log.SetLevel(level)
+
 	log.Info("host is", config.Args.HOST_URL)
 
 	db_pass, err := os.ReadFile(config.Args.DB_PASSWORD_FILE)
